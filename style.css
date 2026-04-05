@@ -67,7 +67,7 @@ body {
 .content { padding: 15px; }
 
 .player-info {
-    background: #111;
+    background: #111; /* Fundo escuro */
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 15px;
@@ -77,16 +77,20 @@ body {
     align-items: center;
 }
 
+/* === CORREÇÃO DE COR DO TEXTO (USER STATUS) === */
 .info-text div:first-child { 
     font-size: 0.6rem; 
-    color: #fff; /* AQUI ESTÁ A CORREÇÃO DE COR */
+    color: #FFFFFF; /* Branco Puro para Máximo Contraste */
     font-weight: bold;
+    text-shadow: 1px 1px 2px #000000; /* Sombra Preta para Destaque */
 }
 
+/* === CORREÇÃO DE COR DO TEXTO (ID DO USUÁRIO) === */
 .info-text div:last-child { 
     font-size: 0.8rem; 
-    color: #fff; 
+    color: #FFFFFF; /* Branco Puro */
     font-family: monospace; 
+    text-shadow: 1px 1px 2px #000000; /* Sombra Preta */
 }
 
 .status-dot {
@@ -155,4 +159,4 @@ input[type="range"]::-webkit-slider-thumb {
     text-align: center; font-size: 0.55rem; color: #555; margin-top: 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 5px;
     }
-    
+         
