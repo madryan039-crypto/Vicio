@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>HS NOBRU J7 FF</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="floating-panel" id="mainPanel">
+    <div class="icon-minimized">H</div>
+    
+    <div class="panel-header" id="header">
+        <h2>Nobru J7 VIP</h2>
+        <div class="btn-minimize" id="minBtn">−</div>
+    </div>
+
+    <div class="content">
+        <div class="player-info">
+            <div class="info-text">
+                <div>PLAYER ID</div>
+                <div id="displayId">CARREGANDO...</div>
+            </div>
+            <div class="status-dot">ATIVO</div>
+        </div>
+
+        <div class="control-row">
+            <span class="label">Auto Aimbot</span>
+            <label class="switch">
+                <input type="checkbox" id="aimbot">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="control-row">
+            <span class="label">Forçar HS</span>
+            <label class="switch">
+                <input type="checkbox" id="forceHs">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="range-container">
+            <div class="range-header">
+                <span>Campo de Visão (FOV)</span>
+                <span id="fovVal" style="color: #ff3a3a;">0</span>
+            </div>
+            <input type="range" id="fovInput" min="0" max="360" value="0">
+        </div>
+
+        <div class="footer" style="margin-top: 20px;">
+            v1.0.4 | DESENVOLVIDO PARA J7 SERIES
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
