@@ -1,82 +1,55 @@
 const panel = document.getElementById('mainPanel');
 const header = document.getElementById('header');
 const minBtn = document.getElementById('minBtn');
+const expandBtn = document.getElementById('expandBtn');
 const fovInput = document.getElementById('fovInput');
 const fovVal = document.getElementById('fovVal');
-const displayId = document.getElementById('displayId');
 
 let isDragging = false;
-let currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
-
-displayId.innerText = "NB-" + Math.floor(Math.random() * 900000 + 100000);
+let xOff = 0, yOff = 0, startX, startY;
 
 function dragStart(e) {
-    if (panel.classList.contains('minimized') && e.type === 'mousedown') return;
+    let cx = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+    let cy = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
     
-    let clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
-    let clientY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
+    startX = cx - xOff;
+    startY = cy - yOff;
 
-    initialX = clientX - xOffset;
-    initialY = clientY - yOffset;
-
-    if (e.target === header || e.target === panel || panel.classList.contains('minimized')) {
+    if (e.target === header || e.target === panel || e.target === expandBtn) {
         isDragging = true;
     }
 }
 
-function dragEnd() {
-    isDragging = false;
-}
-
 function drag(e) {
-    if (isDragging) {
-        e.preventDefault();
-        let clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
-        let clientY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
-
-        currentX = clientX - initialX;
-        currentY = clientY - initialY;
-
-        xOffset = currentX;
-        yOffset = currentY;
-
-        setTranslate(currentX, currentY, panel);
-    }
+    if (!isDragging) return;
+    e.preventDefault();
+    
+    let cx = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+    let cy = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
+    
+    xOff = cx - startX;
+    yOff = cy - startY;
+    
+    panel.style.transform = `translate3d(${xOff}px, ${yOff}px, 0)`;
 }
 
-function setTranslate(xPos, yPos, el) {
-    el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
-}
+function dragEnd() { isDragging = false; }
 
-panel.addEventListener("touchstart", dragStart, {passive: false});
-window.addEventListener("touchend", dragEnd);
+panel.addEventListener("touchstart", dragStart);
 window.addEventListener("touchmove", drag, {passive: false});
+window.addEventListener("touchend", dragEnd);
 
 panel.addEventListener("mousedown", dragStart);
-window.addEventListener("mouseup", dragEnd);
 window.addEventListener("mousemove", drag);
+window.addEventListener("mouseup", dragEnd);
 
-function toggleMin() {
+function toggle() {
     panel.classList.toggle('minimized');
 }
 
-minBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    toggleMin();
-});
+minBtn.onclick = (e) => { e.stopPropagation(); toggle(); };
+expandBtn.onclick = (e) => { e.stopPropagation(); toggle(); };
 
-panel.addEventListener('click', () => {
-    if (panel.classList.contains('minimized')) toggleMin();
-});
-
-fovInput.addEventListener('input', (e) => {
-    fovVal.innerText = e.target.value;
-});
-
-document.getElementById('aimbot').addEventListener('change', (e) => {
-    console.log("Aimbot:", e.target.checked);
-});
-
-document.getElementById('forceHs').addEventListener('change', (e) => {
-    console.log("ForceHS:", e.target.checked);
-});
+fovInput.oninput = () => {
+    fovVal.innerText = fovInput.value;
+};
