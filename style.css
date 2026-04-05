@@ -74,10 +74,20 @@ body {
     display: flex;
     justify-content: space-between;
     border-left: 4px solid #ff0000;
+    align-items: center;
 }
 
-.info-text div:first-child { font-size: 0.6rem; color: #777; }
-.info-text div:last-child { font-size: 0.8rem; color: #fff; font-family: monospace; }
+.info-text div:first-child { 
+    font-size: 0.6rem; 
+    color: #fff; /* AQUI ESTÁ A CORREÇÃO DE COR */
+    font-weight: bold;
+}
+
+.info-text div:last-child { 
+    font-size: 0.8rem; 
+    color: #fff; 
+    font-family: monospace; 
+}
 
 .status-dot {
     font-size: 0.6rem;
