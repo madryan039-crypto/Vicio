@@ -4,9 +4,12 @@ const minBtn = document.getElementById('minBtn');
 const expandBtn = document.getElementById('expandBtn');
 const fovInput = document.getElementById('fovInput');
 const fovVal = document.getElementById('fovVal');
+const displayId = document.getElementById('displayId');
 
 let isDragging = false;
 let xOff = 0, yOff = 0, startX, startY;
+
+displayId.innerText = "USER-" + Math.floor(Math.random() * 9000 + 1000);
 
 function dragStart(e) {
     let cx = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
@@ -43,13 +46,15 @@ panel.addEventListener("mousedown", dragStart);
 window.addEventListener("mousemove", drag);
 window.addEventListener("mouseup", dragEnd);
 
-function toggle() {
+function toggle(e) {
+    e.stopPropagation();
     panel.classList.toggle('minimized');
 }
 
-minBtn.onclick = (e) => { e.stopPropagation(); toggle(); };
-expandBtn.onclick = (e) => { e.stopPropagation(); toggle(); };
+minBtn.onclick = toggle;
+expandBtn.onclick = toggle;
 
 fovInput.oninput = () => {
     fovVal.innerText = fovInput.value;
 };
+    
