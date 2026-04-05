@@ -18,12 +18,11 @@ body {
     top: 20%;
     left: 10%;
     width: 280px;
-    background: rgba(10, 10, 15, 0.95);
+    background: rgba(10, 10, 15, 0.98);
     border-radius: 12px;
     border: 2px solid #ff0000;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
     z-index: 100000;
-    transition: transform 0.1s linear;
 }
 
 .floating-panel.minimized {
@@ -31,6 +30,9 @@ body {
     height: 60px;
     border-radius: 50%;
     border: 3px solid #ff0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .panel-header {
@@ -65,60 +67,82 @@ body {
 .content { padding: 15px; }
 
 .player-info {
-    background: #1a1a1a;
+    background: #111;
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
-    border-bottom: 2px solid #ff0000;
+    border-left: 4px solid #ff0000;
 }
+
+.info-text div:first-child { font-size: 0.6rem; color: #777; }
+.info-text div:last-child { font-size: 0.8rem; color: #fff; font-family: monospace; }
 
 .status-dot {
     font-size: 0.6rem;
     color: #00ff00;
     font-weight: bold;
+    background: rgba(0, 255, 0, 0.1);
+    padding: 2px 6px;
+    border-radius: 10px;
 }
 
 .control-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
+    align-items: center;
 }
 
 .label { color: #eee; font-size: 0.9rem; }
 
-.switch { width: 40px; height: 20px; position: relative; }
-.switch input { opacity: 0; }
+.switch { width: 42px; height: 22px; position: relative; display: inline-block; }
+.switch input { opacity: 0; width: 0; height: 0; }
 .slider {
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: #333; border-radius: 20px; transition: 0.3s;
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background: #333; border-radius: 22px; transition: 0.3s;
 }
 .slider:before {
-    content: ""; position: absolute; height: 14px; width: 14px;
+    content: ""; position: absolute; height: 16px; width: 16px;
     left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.3s;
 }
 input:checked + .slider { background: #ff0000; }
 input:checked + .slider:before { transform: translateX(20px); }
 
-.range-header {
-    display: flex; justify-content: space-between;
-    color: #aaa; font-size: 0.8rem; margin-bottom: 5px;
-}
+.range-container { margin-top: 10px; }
+.range-header { display: flex; justify-content: space-between; color: #aaa; font-size: 0.8rem; margin-bottom: 8px; }
 
-#fovVal { color: #ff0000; font-weight: bold; }
+input[type="range"] {
+    width: 100%;
+    height: 5px;
+    background: #222;
+    border-radius: 5px;
+    -webkit-appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #ff0000;
+    border-radius: 50%;
+    cursor: pointer;
+}
 
 .icon-minimized {
-    display: none; width: 100%; height: 100%;
-    color: #fff; font-weight: bold; align-items: center;
-    justify-content: center; cursor: pointer; font-size: 1.2rem;
+    display: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
-.floating-panel.minimized .icon-minimized { display: flex; }
+.floating-panel.minimized .icon-minimized { display: block; }
 .floating-panel.minimized .panel-header, 
 .floating-panel.minimized .content { display: none; }
 
 .footer {
-    text-align: center; font-size: 0.6rem; color: #666; margin-top: 10px;
+    text-align: center; font-size: 0.55rem; color: #555; margin-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 5px;
     }
     
